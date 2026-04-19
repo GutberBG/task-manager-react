@@ -1,0 +1,13 @@
+generator client {
+  provider = "prisma-client-js" // Corregido: antes tenías "prisma-client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Task {
+  id        Int     @id @default(autoincrement())
+  text      String
+  completed Boolean @default(false)
+}
