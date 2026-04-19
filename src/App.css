@@ -182,3 +182,49 @@
     border-right-color: var(--border);
   }
 }
+
+.user-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.logout-btn, .test-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-btn {
+  background: #feb2b2;
+  color: #9b2c2c;
+}
+
+.logout-btn:hover {
+  background: #fc8181;
+}
+
+.test-btn {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.test-btn:hover {
+  background: #9ae6b4;
+}
+
+.api-message {
+  background: #ebf8ff;
+  color: #2b6cb0;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+  border: 1px solid #bee3f8;
+  animation: fadeIn 0.3s ease-out;
+}

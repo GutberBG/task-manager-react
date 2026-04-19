@@ -4,6 +4,7 @@ import TaskList from "./componentes/TaskList";
 import TaskInput from "./componentes/TaskInput";
 import Footer from "./componentes/Footer";
 import EmptyState from "./componentes/EmptyState";
+import Login from "./componentes/Login";
 
 interface Task {
   id: number;
@@ -13,6 +14,8 @@ interface Task {
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
+  const [message, setMessage] = useState("");
 
   
   useEffect(() => {
@@ -72,9 +75,40 @@ function App() {
     })
     .catch((err) => console.error("Error al actualizar:", err));
 };
+  const handleLogin = (newToken: string) => {
+    localStorage.setItem("token", newToken);
+    setToken(newToken);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setToken(null);
+  };
+
+  const testPrivateApi = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/private", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      setMessage(data.message || "Acceso denegado");
+    } catch (err) {
+      setMessage("Error al conectar");
+    }
+  };
+
+  if (!token) {
+    return <Login onLogin={handleLogin} />;
+  }
 
   return (
     <div className="app-container">
+      <div className="user-controls">
+        <button className="test-btn" onClick={testPrivateApi}>Probar API Privada</button>
+        <button className="logout-btn" onClick={handleLogout}>Cerrar Sesión</button>
+      </div>
+      {message && <div className="api-message">{message}</div>}
+      
       <Header />
       <TaskInput addTask={addTask} />
 
