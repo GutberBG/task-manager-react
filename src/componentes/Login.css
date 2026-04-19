@@ -3,20 +3,21 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 20px;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  width: 100vw;
+  background: var(--secondary-gradient);
+  padding: 2rem;
 }
 
 .login-card {
-  background: white;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  background: #1e293b;
+  padding: 3rem;
+  border-radius: 24px;
+  box-shadow: var(--card-shadow);
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
   text-align: center;
-  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid #334155;
 }
 
 @keyframes slideUp {
@@ -25,85 +26,87 @@
 }
 
 .login-card h2 {
-  margin-bottom: 8px;
-  color: #1a202c;
-  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+  font-size: 2rem;
   font-weight: 800;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .login-card p {
-  color: #718096;
-  margin-bottom: 32px;
-  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  font-size: 1rem;
 }
 
 .form-group {
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #4a5568;
+  margin-bottom: 0.6rem;
+  font-weight: 700;
+  color: var(--text-main);
   font-size: 0.9rem;
 }
 
 .form-group input {
   width: 100%;
-  padding: 14px;
-  border: 2px solid #edf2f7;
-  border-radius: 12px;
+  padding: 1rem;
+  border: 2px solid #334155;
+  border-radius: 14px;
   font-size: 1rem;
   transition: all 0.3s;
-  background-color: #f7fafc;
+  background-color: #0f172a;
+  color: white;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #667eea;
-  background-color: white;
-  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+  border-color: var(--accent-color);
+  background-color: #1e293b;
+  box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.1);
 }
+
 
 .error-message {
-  color: #c53030;
+  color: #fa5252;
   background: #fff5f5;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  font-size: 0.85rem;
-  border: 1px solid #feb2b2;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  border: 1px solid #ffe3e3;
+  font-weight: 500;
 }
 
-button {
+button[type="submit"] {
   width: 100%;
-  padding: 14px;
-  background: #667eea;
+  padding: 1rem;
+  background: var(--primary-gradient);
   color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 1rem;
+  border-radius: 14px;
+  font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 4px 6px -1px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
 }
 
-button:hover {
-  background: #5a67d8;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(102, 126, 234, 0.4);
+button[type="submit"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(118, 75, 162, 0.4);
 }
 
-button:active {
-  transform: translateY(0);
-}
-
-button:disabled {
-  background: #cbd5e0;
+button[type="submit"]:disabled {
+  background: #dee2e6;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
+

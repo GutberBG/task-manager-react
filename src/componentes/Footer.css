@@ -1,5 +1,6 @@
 p {
   text-align: center;
   font-size: 14px;
-  color: #555;
-}
+  color: var(--text-muted);
+  margin-top: 2rem;
+}

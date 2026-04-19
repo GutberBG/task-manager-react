@@ -5,6 +5,8 @@ import TaskInput from "./componentes/TaskInput";
 import Footer from "./componentes/Footer";
 import EmptyState from "./componentes/EmptyState";
 import Login from "./componentes/Login";
+import "./App.css";
+
 
 interface Task {
   id: number;
@@ -104,13 +106,17 @@ function App() {
   return (
     <div className="app-container">
       <div className="user-controls">
-        <button className="test-btn" onClick={testPrivateApi}>Probar API Privada</button>
+        <button className="test-btn" onClick={testPrivateApi} title="Probar API Privada">
+          🛡️
+        </button>
         <button className="logout-btn" onClick={handleLogout}>Cerrar Sesión</button>
       </div>
       {message && <div className="api-message">{message}</div>}
       
-      <Header />
-      <TaskInput addTask={addTask} />
+      <div className="input-section">
+        <Header />
+        <TaskInput addTask={addTask} />
+      </div>
 
       {tasks.length === 0 ? (
         <EmptyState />

@@ -1,27 +1,176 @@
-.task-item {
+.task-card {
+  background: #1e272e;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  min-height: 0;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #2f3542;
+  z-index: 1;
+}
+
+
+
+.task-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: #7f8c8d; /* Lead/Gray color */
+  z-index: 2;
+  transition: background 0.3s ease;
+}
+
+.task-card.completed::before {
+  background: #27ae60; /* Green color */
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  margin-bottom: 8px;
-  background-color: #f7f7f7;
-  border-radius: 8px;
+  padding: 1.2rem;
+  color: #f8fafc;
+  z-index: 3;
 }
 
-.task-item.completed {
-  text-decoration: line-through;
-  opacity: 0.6;
+.task-id {
+  font-weight: 800;
+  font-size: 0.85rem;
+  opacity: 1;
+  background: #334155;
+  color: #94a3b8;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  border: 1px solid #475569;
 }
 
-.task-item button {
-  border: none;
-  background: #ffffff;
+.delete-btn {
+  background: #334155;
+  color: #94a3b8;
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  border: 1px solid #475569;
+}
+
+.delete-btn:hover {
+  background: #fa5252;
   color: white;
-  padding: 5px 10px;
-  border-radius: 6px;
-  cursor: pointer;
+  border-color: #fa5252;
+  transform: rotate(90deg);
 }
 
-.task-item button:hover {
-  background: #e63946;
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
 }
+
+.task-text {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #ffffff;
+  line-height: 1.4;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.task-card.completed .task-text {
+  text-decoration: line-through;
+  opacity: 0.4;
+}
+
+.card-footer {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  border: none;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  background: #334155;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.checkbox-container:hover {
+  transform: scale(1.05);
+  background: #475569;
+}
+
+.task-card.completed .checkbox-container {
+  background: #27ae60;
+  box-shadow: none; /* Removed the glow */
+}
+
+
+.checkbox-container input {
+  display: none;
+}
+
+.checkmark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.2s;
+  background: transparent;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background: white;
+  border-color: white;
+}
+
+.checkmark::after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid #27ae60;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .checkmark::after {
+  display: block;
+}
+
