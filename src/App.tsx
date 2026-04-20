@@ -7,6 +7,7 @@ import EmptyState from "./componentes/EmptyState";
 import Login from "./componentes/Login";
 import "./App.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
 
 interface Task {
   id: number;
@@ -19,9 +20,9 @@ function App() {
   const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
   const [message, setMessage] = useState("");
 
-  
+
   useEffect(() => {
-    fetch("http://localhost:3000/tasks")
+    fetch(`${API_URL}/tasks`)
       .then((res) => res.json())
       .then((data) => setTasks(data))
       .catch((err) => console.error("Error fetching tasks:", err));
@@ -34,7 +35,7 @@ function App() {
   const addTask = (newTaskText: string) => {
     const newTask = { text: newTaskText, completed: false };
 
-    fetch("http://localhost:3000/tasks", {
+    fetch(`${API_URL}/tasks`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTask),
@@ -46,7 +47,7 @@ function App() {
   };
 
   const deleteTask = (idToDelete: number) => {
-    fetch(`http://localhost:3000/tasks/${idToDelete}`, {
+    fetch(`${API_URL}/tasks/${idToDelete}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -58,25 +59,25 @@ function App() {
   };
 
   const toggleTask = (idToToggle: number) => {
-  const taskToUpdate = tasks.find(t => t.id === idToToggle);
-  if (!taskToUpdate) return;
+    const taskToUpdate = tasks.find(t => t.id === idToToggle);
+    if (!taskToUpdate) return;
 
-  fetch(`http://localhost:3000/tasks/${idToToggle}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ 
-      completed: !taskToUpdate.completed
-    }),
-  })
-    .then((res) => res.json())
-    .then((updatedTaskFromServer) => {
-      const newTasks = tasks.map((task) =>
-        task.id === idToToggle ? updatedTaskFromServer : task
-      );
-      setTasks(newTasks);
+    fetch(`${API_URL}/tasks/${idToToggle}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        completed: !taskToUpdate.completed
+      }),
     })
-    .catch((err) => console.error("Error al actualizar:", err));
-};
+      .then((res) => res.json())
+      .then((updatedTaskFromServer) => {
+        const newTasks = tasks.map((task) =>
+          task.id === idToToggle ? updatedTaskFromServer : task
+        );
+        setTasks(newTasks);
+      })
+      .catch((err) => console.error("Error al actualizar:", err));
+  };
   const handleLogin = (newToken: string) => {
     localStorage.setItem("token", newToken);
     setToken(newToken);
@@ -89,7 +90,7 @@ function App() {
 
   const testPrivateApi = async () => {
     try {
-      const res = await fetch("http://localhost:3000/private", {
+      const res = await fetch(`${API_URL}/private`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -112,7 +113,7 @@ function App() {
         <button className="logout-btn" onClick={handleLogout}>Cerrar Sesión</button>
       </div>
       {message && <div className="api-message">{message}</div>}
-      
+
       <div className="input-section">
         <Header />
         <TaskInput addTask={addTask} />
@@ -127,7 +128,7 @@ function App() {
           toggleTask={toggleTask}
         />
       )}
-      
+
       <Footer total={totalTasks} pending={pendingTasks} />
     </div>
   );
