@@ -11,6 +11,7 @@ node_modules
 backend/node_modules
 dist
 dist-ssr
+build/
 *.local
 
 # Editor directories and files
@@ -26,3 +27,5 @@ dist-ssr
 backend/.env
 
 .env
+.env.local
+.env.*.local
