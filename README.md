@@ -1,16 +1,25 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Task Manager React
+Aplicación de gestión de tareas construida con React y Vite para organizar y administrar pendientes de manera eficiente.
+<!-- BADGE_CI -->
+## 🚀 Instalación local
+```bash
+git clone https://github.com/GutberBG/task-manager-react.git
+cd task-manager-react
+npm install
+```
+### Variables de entorno
+Crea un archivo `.env` en la raíz con las siguientes claves (sin valores reales en este
+documento):
+```
+DATABASE_URL=
+JWT_SECRET=
+PORT=
+```
+## 🚀 Comandos disponibles
+| Comando | Descripción |
+|------------------|-------------------------------------------|
+| `npm run dev` | Levanta el entorno de desarrollo |
+| `npm run build` | Genera el build de producción |
+| `npm test` | Corre las pruebas automatizadas (pendiente — Sesión 3) |
+## 🚀 Base de datos
+PostgreSQL con migraciones y seeds gestionados con Prisma (ver Módulo 2).
