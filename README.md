@@ -1,6 +1,6 @@
 # Task Manager React
 Aplicación de gestión de tareas construida con React y Vite para organizar y administrar pendientes de manera eficiente.
-<!-- BADGE_CI -->
+[![CI](https://github.com/GutberBG/task-manager-react/actions/workflows/ci.yml/badge.svg)](https://github.com/GutberBG/task-manager-react/actions/workflows/ci.yml)
 ## 🚀 Instalación local
 ```bash
 git clone https://github.com/GutberBG/task-manager-react.git
