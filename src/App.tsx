@@ -35,117 +35,117 @@ function App() {
   const addTask = (newTaskText: string) => {
     const newTask = { text: newTaskText, completed: false };
 
-    fetch(`${API_URL}/tasks`, {
+    fetch(`${API_URL}/tasks`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTask),
     })
       .then((res) => res.json())
-      .then((savedTask) => {
-        setTasks([...tasks, savedTask]);
-      });
-  };
+    .then((savedTask) => {
+      setTasks([...tasks, savedTask]);
+    });
+};
 
-  const deleteTask = (idToDelete: number) => {
-    fetch(`${API_URL}/tasks/${idToDelete}`, {
-      method: "DELETE",
+const deleteTask = (idToDelete: number) => {
+  fetch(`${API_URL}/tasks/${idToDelete}`, {
+    method: "DELETE",
+  })
+    .then((res) => {
+      if (res.ok) {
+        setTasks(tasks.filter((task) => task.id !== idToDelete));
+      }
     })
-      .then((res) => {
-        if (res.ok) {
-          setTasks(tasks.filter((task) => task.id !== idToDelete));
-        }
-      })
-      .catch((err) => console.error("Error al borrar:", err));
-  };
+    .catch((err) => console.error("Error al borrar:", err));
+};
 
-  const toggleTask = (idToToggle: number) => {
-    const taskToUpdate = tasks.find(t => t.id === idToToggle);
-    if (!taskToUpdate) return;
+const toggleTask = (idToToggle: number) => {
+  const taskToUpdate = tasks.find(t => t.id === idToToggle);
+  if (!taskToUpdate) return;
 
-    fetch(`${API_URL}/tasks/${idToToggle}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        completed: !taskToUpdate.completed
-      }),
+  fetch(`${API_URL}/tasks/${idToToggle}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      completed: !taskToUpdate.completed
+    }),
+  })
+    .then((res) => res.json())
+    .then((updatedTaskFromServer) => {
+      const newTasks = tasks.map((task) =>
+        task.id === idToToggle ? updatedTaskFromServer : task
+      );
+      setTasks(newTasks);
     })
-      .then((res) => res.json())
-      .then((updatedTaskFromServer) => {
-        const newTasks = tasks.map((task) =>
-          task.id === idToToggle ? updatedTaskFromServer : task
-        );
-        setTasks(newTasks);
-      })
-      .catch((err) => console.error("Error al actualizar:", err));
-  };
+    .catch((err) => console.error("Error al actualizar:", err));
+};
 
-  const sortTasksByName = () => {
-    const sortedTasks = [...tasks].sort((a, b) => a.text.localeCompare(b.text));
-    setTasks(sortedTasks);
-  };
+const sortTasksByName = () => {
+  const sortedTasks = [...tasks].sort((a, b) => a.text.localeCompare(b.text));
+  setTasks(sortedTasks);
+};
 
-  const handleLogin = (newToken: string) => {
-    localStorage.setItem("token", newToken);
-    setToken(newToken);
-  };
+const handleLogin = (newToken: string) => {
+  localStorage.setItem("token", newToken);
+  setToken(newToken);
+};
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
-  };
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  setToken(null);
+};
 
-  const testPrivateApi = async () => {
-    try {
-      const res = await fetch(`${API_URL}/private`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await res.json();
-      setMessage(data.message || "Acceso denegado");
-    } catch (err) {
-      setMessage("Error al conectar");
-    }
-  };
-
-  if (!token) {
-    return <Login onLogin={handleLogin} />;
+const testPrivateApi = async () => {
+  try {
+    const res = await fetch(`${API_URL}/private`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json();
+    setMessage(data.message || "Acceso denegado");
+  } catch (err) {
+    setMessage("Error al conectar");
   }
+};
 
-  return (
-    <div className="app-container">
-      <div className="user-controls">
-        <button className="test-btn" onClick={testPrivateApi} title="Probar API Privada">
-          🛡️
-        </button>
-        <button className="logout-btn" onClick={handleLogout}>Cerrar Sesión</button>
-      </div>
-      {message && <div className="api-message">{message}</div>}
+if (!token) {
+  return <Login onLogin={handleLogin} />;
+}
 
-      <div className="input-section">
-        <Header />
-        <TaskInput addTask={addTask} />
-        {tasks.length > 0 && (
-          <button 
-            onClick={sortTasksByName} 
-            style={{ marginTop: '10px', padding: '5px 10px', cursor: 'pointer', borderRadius: '4px', border: '1px solid #ccc' }}
-          >
-            Ordenar por Nombre
-          </button>
-        )}
-      </div>
-
-      {tasks.length === 0 ? (
-        <EmptyState />
-      ) : (
-        <TaskList
-          tasks={tasks}
-          deleteTask={deleteTask}
-          toggleTask={toggleTask}
-        />
-      )}
-
-      <Footer total={totalTasks} pending={pendingTasks} />
+return (
+  <div className="app-container">
+    <div className="user-controls">
+      <button className="test-btn" onClick={testPrivateApi} title="Probar API Privada">
+        🛡️
+      </button>
+      <button className="logout-btn" onClick={handleLogout}>Cerrar Sesión</button>
     </div>
-  );
+    {message && <div className="api-message">{message}</div>}
+
+    <div className="input-section">
+      <Header />
+      <TaskInput addTask={addTask} />
+      {tasks.length > 0 && (
+        <button
+          onClick={sortTasksByName}
+          style={{ marginTop: '10px', padding: '5px 10px', cursor: 'pointer', borderRadius: '4px', border: '1px solid #ccc' }}
+        >
+          Ordenar por Nombre
+        </button>
+      )}
+    </div>
+
+    {tasks.length === 0 ? (
+      <EmptyState />
+    ) : (
+      <TaskList
+        tasks={tasks}
+        deleteTask={deleteTask}
+        toggleTask={toggleTask}
+      />
+    )}
+
+    <Footer total={totalTasks} pending={pendingTasks} />
+  </div>
+);
 }
 
 export default App;
