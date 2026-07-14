@@ -25,7 +25,7 @@ describe('contarTareasPendientes', () => {
       { completada: false },
       { completada: false },
     ]
-    expect(contarTareasPendientes(tareas)).toBe(2)
+    expect(contarTareasPendientes(tareas)).toBe(999)
   })
 
   it('devuelve 0 cuando la lista está vacía', () => {
