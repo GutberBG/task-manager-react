@@ -24,6 +24,7 @@ function TaskInput({ addTask }: { addTask: (task: string) => void }) {
       <input
         type="text"
         placeholder="Escribe una tarea..."
+        aria-label="Nueva tarea"
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
