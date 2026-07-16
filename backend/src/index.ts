@@ -77,10 +77,16 @@ app.get("/tasks", async (req: any, res: any) => {
 });
 
 app.post("/tasks", async (req: any, res: any) => {
+  const { text } = req.body;
+
+  if (!text || !text.trim()) {
+    return res.status(400).json({ error: "El texto es obligatorio" });
+  }
+
   try {
     const newTask = await prisma.task.create({
       data: {
-        text: req.body.text,
+        text,
         completed: false,
       },
     });
@@ -124,6 +130,10 @@ app.delete("/tasks/:id", async (req: any, res: any) => {
 });
 
 // Encendemos el servidor
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+export default app;
