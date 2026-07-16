@@ -8,13 +8,12 @@ cd task-manager-react
 npm install
 ```
 ### Variables de entorno
-Crea un archivo `.env` en la raíz con las siguientes claves (sin valores reales en este
-documento):
-```
-DATABASE_URL=
-JWT_SECRET=
-PORT=
-```
+El proyecto utiliza variables de entorno para su configuración. Hemos preparado un archivo `.env.example` en la raíz que documenta las variables requeridas.
+
+Para empezar:
+1. Copia el archivo `.env.example` (en la raíz) y renómbralo a `.env` para el frontend.
+2. Copia el archivo `backend/.env.example` y renómbralo a `backend/.env` para el backend.
+3. Completa los valores reales de las variables en ambos archivos (estos archivos están ignorados por Git para proteger tus credenciales).
 ## 🚀 Comandos disponibles
 | Comando | Descripción |
 |------------------|-------------------------------------------|
