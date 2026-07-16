@@ -78,6 +78,12 @@ function App() {
       })
       .catch((err) => console.error("Error al actualizar:", err));
   };
+
+  const sortTasksByName = () => {
+    const sortedTasks = [...tasks].sort((a, b) => a.text.localeCompare(b.text));
+    setTasks(sortedTasks);
+  };
+
   const handleLogin = (newToken: string) => {
     localStorage.setItem("token", newToken);
     setToken(newToken);
@@ -117,6 +123,14 @@ function App() {
       <div className="input-section">
         <Header />
         <TaskInput addTask={addTask} />
+        {tasks.length > 0 && (
+          <button
+            onClick={sortTasksByName}
+            style={{ marginTop: '10px', padding: '5px 10px', cursor: 'pointer', borderRadius: '4px', border: '1px solid #ccc' }}
+          >
+            Ordenar por Nombre
+          </button>
+        )}
       </div>
 
       {tasks.length === 0 ? (
