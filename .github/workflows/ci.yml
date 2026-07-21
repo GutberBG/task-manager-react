@@ -90,9 +90,9 @@ jobs:
       - name: Instalar Railway CLI
         run: npm install -g @railway/cli
       - name: Desplegar a Railway (staging)
-        run: railway up --service backend --environment staging
+        run: railway up --service backend
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_STAGING_TOKEN }}
 
   deploy-produccion:
     name: Deploy a Producción (manual)
@@ -102,6 +102,6 @@ jobs:
       - uses: actions/checkout@v4
       - run: npm install -g @railway/cli
       - name: Desplegar a Railway (produccion)
-        run: railway up --service backend --environment production
+        run: railway up --service backend
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
