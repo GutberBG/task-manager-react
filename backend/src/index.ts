@@ -46,6 +46,10 @@ app.get("/", (req: any, res: any) => {
   res.send("Backend is working with Prisma and Postgres!");
 });
 
+app.get('/health', (req: any, res: any) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 app.post("/login", (req: any, res: any) => {
   const { username, password } = req.body;
 
