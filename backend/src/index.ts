@@ -134,7 +134,6 @@ app.delete("/tasks/:id", async (req: any, res: any) => {
 });
 
 // Encendemos el servidor
-throw new Error('fallo simulado');
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
