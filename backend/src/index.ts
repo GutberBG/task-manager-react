@@ -43,7 +43,7 @@ const verifyToken = (req: any, res: any, next: any) => {
 };
 
 app.get("/", (req: any, res: any) => {
-  res.send("Backend is working with Prisma and Postgres!");
+  res.send("Backend is working with Prisma, Postgres and Railways!");
 });
 
 app.get('/health', (req: any, res: any) => {
